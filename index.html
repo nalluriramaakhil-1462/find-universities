@@ -1,8 +1,221 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Explore universities, IITs, NITs and medical institutes in India."><title>Find Universities India</title><link rel="stylesheet" href="style.css"></head>
-<body><header><div class="wrap nav"><a class="brand" href="#"><span class="logo">FU</span> Find<span class="teal">Universities</span></a><nav><a href="#search">Explore colleges</a><a href="#guide">Admissions guide</a><a href="#about">About</a></nav></div></header>
-<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h1>Find the right place to <em>shape your future.</em></h1><p>Explore universities, IITs, NITs and medical institutes across India. Search colleges and check official course, fee and admission information.</p><a class="button" href="#search">Explore institutes ↓</a><div class="note">✓ Start your college search in one place</div></div><div class="art"><div class="sun"></div><div class="bubble">✦ Discover<br><small>new possibilities</small></div><div class="college"><div class="roof"></div><div class="building"><div class="triangle"></div><div class="columns"><i></i><i></i><i></i><i></i><i></i></div></div><div class="tree t1">♣</div><div class="tree t2">♣</div></div><div class="ground"></div><div class="bubble b2">✧ Your future<br><small>starts with a search</small></div></div></div></section>
-<div class="wrap stats"><div><b id="total">22</b><span>Featured institutes</span></div><div><b>4</b><span>Institute categories</span></div><div><b>India</b><span>Nationwide discovery</span></div></div>
-<section class="wrap section" id="search"><div class="section-head"><div><div class="eyebrow">START EXPLORING</div><h2>Find your institute</h2></div><p>Search by name, course, city or state. Filter the list to narrow your options.</p></div><div class="filters"><label class="search">⌕ <input id="q" type="search" placeholder="Search institute, course, city or state..."></label><label class="select"><small>Category</small><select id="category"><option value="all">All categories</option><option>University</option><option>IIT</option><option>NIT</option><option>Medical</option></select></label><label class="select"><small>State / region</small><select id="state"><option value="all">All states</option></select></label><button id="reset">Reset</button></div><div class="resultbar"><b id="count" aria-live="polite">Showing institutes</b><span>Open official sites for current details ↗</span></div><div class="grid" id="results"></div><div class="empty" id="empty" hidden><h3>No matching institutes</h3><p>Try another search or reset your filters.</p><button class="button" id="empty-reset">Reset filters</button></div><p class="disclaimer">Important: this is a starter directory, not a complete or ranked list. Course availability, fees, eligibility and deadlines change. Confirm all details with the official institute and current admission authority.</p></section>
-<section class="guide" id="guide"><div class="wrap"><div class="eyebrow">PLAN YOUR NEXT STEP</div><h2>Admissions: what to check</h2><div class="guide-grid"><article><span>01</span><h3>Courses</h3><p>Check the institute's official course list, degree type, duration and eligibility.</p></article><article><span>02</span><h3>Entrance exams</h3><p>Engineering admissions may use JEE Main or JEE Advanced; medical admissions commonly use NEET-UG. Verify each programme's current rules.</p></article><article><span>03</span><h3>Fees & scholarships</h3><p>Fees vary by course, category, hostel and year. Look for the latest official fee notice and scholarship information.</p></article><article><span>04</span><h3>Applications</h3><p>Use the official admissions portal to confirm deadlines, documents, counselling steps and seat availability.</p></article></div></div></section>
-<section class="about" id="about"><div class="wrap about-grid"><div><div class="eyebrow">YOUR SEARCH, SIMPLIFIED</div><h2>A clearer way to explore your options.</h2></div><div><b>Search</b><p>Enter an institute name, course, city or state.</p></div><div><b>Filter</b><p>Browse universities, IITs, NITs and medical institutes.</p></div><div><b>Verify</b><p>Use official websites for up-to-date admissions information.</p></div></div></section><footer><div class="wrap foot"><a class="brand" href="#"><span class="logo">FU</span> Find<span class="teal">Universities</span></a><p>Helping students begin their college search.</p><small>© <span id="year"></span> Find Universities India</small></div></footer><script src="script.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIND UNIVERSITIES | India College Finder</title>
+<style>
+:root{--navy:#102344;--blue:#2457d6;--pale:#f3f6fc;--teal:#20b6a4}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#17243b;background:#f7f9fd;line-height:1.6}
+header{background:white;border-bottom:1px solid #e6eaf2;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:25px;font-weight:800;color:var(--navy);text-decoration:none}
+.brand span{color:var(--blue)}
+nav{display:flex;gap:22px;flex-wrap:wrap}
+nav a{color:#33425c;text-decoration:none;font-weight:600}
+.hero{background:linear-gradient(120deg,#102344,#2457d6);color:white;padding:75px 7% 65px}
+.hero-inner{max-width:1100px;margin:auto}
+.eyebrow{font-size:13px;letter-spacing:2px;font-weight:bold;color:#8de6dc}
+h1{font-size:clamp(36px,5vw,58px);line-height:1.12;margin:15px 0}
+.hero p{max-width:680px;color:#e1e9ff;font-size:18px}
+.hero a{display:inline-block;background:white;color:#1747b8;padding:13px 22px;border-radius:9px;text-decoration:none;font-weight:bold;margin-top:12px}
+.stats{display:flex;gap:45px;flex-wrap:wrap;margin-top:36px}
+.stats strong{display:block;font-size:24px}
+.stats span{font-size:13px;color:#d8e4ff}
+main{max-width:1100px;margin:auto;padding:45px 22px}
+.section-tag{color:var(--blue);font-size:12px;font-weight:bold;letter-spacing:2px}
+h2{font-size:30px;margin:6px 0}
+.intro{color:#68758b;margin-top:0}
+.search-panel{background:white;border:1px solid #e3e9f3;border-radius:16px;padding:22px;margin:24px 0;box-shadow:0 8px 28px #162c5010}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+input,select{width:100%;padding:14px;border:1px solid #d5ddeb;border-radius:9px;background:white;font-size:15px;color:#17243b}
+button{cursor:pointer;border:0;border-radius:9px;background:var(--blue);color:white;padding:13px 18px;font-weight:bold}
+button:hover{opacity:.9}
+.results-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin:24px 0 15px}
+#count{color:#64718a;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e9f2;border-radius:14px;padding:21px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 5px 18px #162c5008}
+.card .symbol{background:#edf2ff;color:#2457d6;border-radius:10px;padding:10px 13px;font-size:22px;margin-bottom:12px}
+.pill{font-size:11px;background:#e9f8f4;color:#087c68;padding:5px 9px;border-radius:20px;font-weight:bold}
+.card h3{margin:12px 0 4px;font-size:19px;line-height:1.35}
+.card p{color:#657188;font-size:14px;margin:4px 0 16px}
+.card a{margin-top:auto;color:var(--blue);font-weight:bold;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.empty{grid-column:1/-1;background:white;border-radius:12px;padding:30px;text-align:center;color:#657188}
+.notice{margin-top:28px;background:#fff8e8;border:1px solid #f2e2b6;padding:16px;border-radius:10px;font-size:13px;color:#665326}
+.guide{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.guide article{background:white;border:1px solid #e4e9f2;border-radius:12px;padding:20px}
+.guide h3{margin-top:4px}
+.guide p{color:#657188;font-size:14px}
+footer{background:#102344;color:#dbe5fa;padding:30px 7%;text-align:center;margin-top:35px}
+footer strong{color:white}
+@media(max-width:750px){.filters{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.guide{grid-template-columns:1fr}.hero{padding:50px 6%}}
+@media(max-width:480px){.cards{grid-template-columns:1fr}header{padding:15px 5%}nav{gap:13px}.stats{gap:24px}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#">FU <span>FindUniversities</span></a>
+<nav>
+<a href="#explore">Explore colleges</a>
+<a href="#guide">Admissions guide</a>
+<a href="#about">About</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div>
+<h1>Find the right place to<br>shape your future.</h1>
+<p>Explore universities, IITs, NITs and medical institutes across India. Search colleges and visit their official websites for course and admission information.</p>
+<a href="#explore">Explore institutes ↓</a>
+<div class="stats">
+<div><strong>Explore</strong><span>Institutes across India</span></div>
+<div><strong>4 categories</strong><span>Engineering, medical & more</span></div>
+<div><strong>Direct links</strong><span>Official institute websites</span></div>
+</div>
+</div>
+</section>
+
+<main>
+<section id="explore">
+<div class="section-tag">START EXPLORING</div>
+<h2>Find your institute</h2>
+<p class="intro">Search by name, category, city or state. Select a filter to narrow your options.</p>
+<div class="search-panel">
+<div class="filters">
+<input id="search" type="search" placeholder="Search institute, city or course...">
+<select id="category" aria-label="Filter by category">
+<option value="">All categories</option>
+<option value="IIT">IIT</option>
+<option value="NIT">NIT</option>
+<option value="University">University</option>
+<option value="Medical">Medical</option>
+</select>
+<select id="state" aria-label="Filter by state">
+<option value="">All states</option>
+<option>Andhra Pradesh</option>
+<option>Delhi</option>
+<option>Karnataka</option>
+<option>Maharashtra</option>
+<option>Tamil Nadu</option>
+<option>Telangana</option>
+<option>Uttar Pradesh</option>
+<option>West Bengal</option>
+<option>Assam</option>
+<option>Rajasthan</option>
+<option>Gujarat</option>
+</select>
+</div>
+</div>
+<div class="results-head">
+<strong>Institute directory</strong>
+<span id="count" aria-live="polite"></span>
+<button id="reset" type="button">Reset filters</button>
+</div>
+<div class="cards" id="cards"></div>
+<div class="notice">Important: This is a starter directory, not a complete or ranked list. Course availability, fees, eligibility and deadlines can change. Always confirm details on the official institute website and current admission authority.</div>
+</section>
+
+<section id="guide" style="margin-top:55px">
+<div class="section-tag">PLAN YOUR NEXT STEP</div>
+<h2>Admissions: what to check</h2>
+<div class="guide">
+<article><h3>01 · Courses</h3><p>Check the official course list, degree type, duration and eligibility requirements.</p></article>
+<article><h3>02 · Entrance exams</h3><p>Check whether you need JEE, NEET, CUET or another entrance examination.</p></article>
+<article><h3>03 · Important dates</h3><p>Confirm application deadlines, counselling dates, fees and documents using official notices.</p></article>
+</div>
+</section>
+
+<section id="about" style="margin-top:45px">
+<div class="section-tag">ABOUT THIS WEBSITE</div>
+<h2>Your college search starts here.</h2>
+<p class="intro">FIND UNIVERSITIES helps students discover higher-education institutions in India through a simple searchable directory and links to official websites.</p>
+</section>
+</main>
+
+<footer><strong>FU FindUniversities</strong><br>Explore your options. Plan your future.<br><small>Verify all admission information with official sources.</small></footer>
+
+<script>
+const institutes = [
+{name:"Indian Institute of Technology Madras",category:"IIT",state:"Tamil Nadu",city:"Chennai",course:"Engineering, Science, Technology",url:"https://www.iitm.ac.in/"},
+{name:"Indian Institute of Technology Delhi",category:"IIT",state:"Delhi",city:"New Delhi",course:"Engineering, Science, Technology",url:"https://home.iitd.ac.in/"},
+{name:"Indian Institute of Technology Bombay",category:"IIT",state:"Maharashtra",city:"Mumbai",course:"Engineering, Science, Technology",url:"https://www.iitb.ac.in/"},
+{name:"Indian Institute of Technology Kanpur",category:"IIT",state:"Uttar Pradesh",city:"Kanpur",course:"Engineering, Science, Technology",url:"https://www.iitk.ac.in/"},
+{name:"Indian Institute of Technology Guwahati",category:"IIT",state:"Assam",city:"Guwahati",course:"Engineering, Science, Technology",url:"https://www.iitg.ac.in/"},
+{name:"National Institute of Technology Tiruchirappalli",category:"NIT",state:"Tamil Nadu",city:"Tiruchirappalli",course:"Engineering, Architecture, Science",url:"https://www.nitt.edu/"},
+{name:"National Institute of Technology Karnataka",category:"NIT",state:"Karnataka",city:"Surathkal",course:"Engineering, Science, Technology",url:"https://www.nitk.ac.in/"},
+{name:"National Institute of Technology Warangal",category:"NIT",state:"Telangana",city:"Warangal",course:"Engineering, Science, Technology",url:"https://nitw.ac.in/"},
+{name:"University of Delhi",category:"University",state:"Delhi",city:"New Delhi",course:"Arts, Science, Commerce, Law",url:"https://www.du.ac.in/"},
+{name:"Jawaharlal Nehru University",category:"University",state:"Delhi",city:"New Delhi",course:"Humanities, Science, Languages",url:"https://www.jnu.ac.in/"},
+{name:"Banaras Hindu University",category:"University",state:"Uttar Pradesh",city:"Varanasi",course:"Arts, Science, Medicine, Technology",url:"https://www.bhu.ac.in/"},
+{name:"University of Hyderabad",category:"University",state:"Telangana",city:"Hyderabad",course:"Science, Humanities, Management",url:"https://uohyd.ac.in/"},
+{name:"Andhra University",category:"University",state:"Andhra Pradesh",city:"Visakhapatnam",course:"Engineering, Science, Arts",url:"https://www.andhrauniversity.edu.in/"},
+{name:"Osmania University",category:"University",state:"Telangana",city:"Hyderabad",course:"Arts, Science, Engineering, Law",url:"https://www.osmania.ac.in/"},
+{name:"AIIMS New Delhi",category:"Medical",state:"Delhi",city:"New Delhi",course:"Medicine, Nursing, Health Sciences",url:"https://www.aiims.edu/"},
+{name:"JIPMER",category:"Medical",state:"Tamil Nadu",city:"Puducherry",course:"Medicine, Nursing, Health Sciences",url:"https://jipmer.edu.in/"},
+{name:"Christian Medical College Vellore",category:"Medical",state:"Tamil Nadu",city:"Vellore",course:"Medicine, Nursing, Health Sciences",url:"https://www.cmch-vellore.edu/"},
+{name:"Kasturba Medical College Manipal",category:"Medical",state:"Karnataka",city:"Manipal",course:"Medicine, Health Sciences",url:"https://manipal.edu/kmc-manipal.html"}
+];
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+const state = document.getElementById("state");
+const cards = document.getElementById("cards");
+const count = document.getElementById("count");
+
+function render() {
+const term = search.value.trim().toLowerCase();
+const selectedCategory = category.value;
+const selectedState = state.value;
+const filtered = institutes.filter(i =>
+(!selectedCategory || i.category === selectedCategory) &&
+(!selectedState || i.state === selectedState) &&
+[i.name,i.city,i.state,i.course,i.category].some(v => v.toLowerCase().includes(term))
+);
+count.textContent = filtered.length + " institute" + (filtered.length === 1 ? "" : "s") + " found";
+cards.replaceChildren();
+if (!filtered.length) {
+const empty = document.createElement("div");
+empty.className = "empty";
+empty.textContent = "No matching institutes. Try another search or reset your filters.";
+cards.appendChild(empty);
+return;
+}
+filtered.forEach(i => {
+const card = document.createElement("article");
+card.className = "card";
+const symbol = document.createElement("div");
+symbol.className = "symbol";
+symbol.textContent = i.category === "Medical" ? "✚" : i.category === "University" ? "🎓" : "⌂";
+const pill = document.createElement("span");
+pill.className = "pill";
+pill.textContent = i.category;
+const title = document.createElement("h3");
+title.textContent = i.name;
+const location = document.createElement("p");
+location.textContent = i.city + ", " + i.state;
+const course = document.createElement("p");
+course.textContent = "Fields: " + i.course;
+const link = document.createElement("a");
+link.href = i.url;
+link.target = "_blank";
+link.rel = "noopener noreferrer";
+link.textContent = "Visit official website ↗";
+card.append(symbol,pill,title,location,course,link);
+cards.appendChild(card);
+});
+}
+search.addEventListener("input",render);
+category.addEventListener("change",render);
+state.addEventListener("change",render);
+document.getElementById("reset").addEventListener("click",()=>{
+search.value="";
+category.value="";
+state.value="";
+render();
+});
+render();
+</script>
+</body>
+</html>
